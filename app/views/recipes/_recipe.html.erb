@@ -1,1 +1,5 @@
-<li><%=recipe.name%></li>
+<h2><%=recipe.name%></h2>
+Rating: <%=recipe.rating%> / 5 <br>
+<%recipe.ingredients.each do |ingredient|%>
+  <%=ingredient.name%>
+<%end%>
