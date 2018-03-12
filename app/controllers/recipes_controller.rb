@@ -4,12 +4,25 @@ class RecipesController < ApplicationController
   end
 
   def new
-    
+    @recipe = Recipe.new
   end
 
   def create
+    recipe = Recipe.create(recipe_params)
+    if recipe
+      redirect_to recipe_path(recipe)
+    else
+      redner 'new'
+    end
   end
 
   def show
+    @recipe = Recipe.find_by(params[:id])
+  end
+
+  private
+
+  def recipe_params
+    params.require(:recipe).permit(:name, :rating, :description, :cook_time, :user_id)
   end
 end
