@@ -1,5 +1,7 @@
 <h4><%=recipe.name%></h4>
 Rating: <%=recipe.rating%> / 5 <br>
+Recipe by: <%=recipe.user.email%> <br>
+Ingredients: 
 <%recipe.ingredients.each do |ingredient|%>
   <%=ingredient.name%>
 <%end%>

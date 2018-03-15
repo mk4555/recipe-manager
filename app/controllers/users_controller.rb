@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  def sign_out
-    user_session.destroy
+  def index
+  end
+
+  def show
   end
 end

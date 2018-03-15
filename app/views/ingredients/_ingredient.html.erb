@@ -1,1 +1,4 @@
-<%=ingredient.name%>
+<h4><%=ingredient.name%></h4>
+<%ingredient.recipes.each do |recipe|%>
+  <li><%=link_to recipe.name, recipe_path(recipe)%></li>
+<%end%>
