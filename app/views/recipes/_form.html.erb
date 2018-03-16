@@ -1,15 +1,6 @@
 <%= form_for @recipe do |f| %>
 
-  <% if @recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
-      <ul>
-      <% @recipe.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "shared/errors", obj: @recipe%>
 
   <%= f.label :name %>:
   <%= f.text_field :name %><br />
@@ -23,6 +14,7 @@
   <%= f.label :description %>:
   <%= f.text_area :description %><br />
 
+  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name%>
 
   <%= f.hidden_field :user_id, :value => current_user.id %><br />
 

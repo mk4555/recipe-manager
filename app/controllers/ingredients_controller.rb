@@ -8,9 +8,10 @@ class IngredientsController < ApplicationController
   end
 
   def create
-    ingredient = Ingredient.create(ingredient_params)
-    if ingredient
-      redirect_to ingredient_path(ingredient)
+    # would validating uniqueness in the model help clean this up?
+    @ingredient = Ingredient.create(ingredient_params)
+    if @ingredient.save
+      redirect_to ingredient_path(@ingredient)
     else
       render 'new'
     end
