@@ -5,19 +5,20 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @ingredients = 6.times.collect { @recipe.recipe_ingredients.build }
   end
 
   def create
-    recipe = Recipe.create(recipe_params)
-    if recipe
-      redirect_to recipe_path(recipe)
+    @recipe = Recipe.create(recipe_params)
+    if @recipe.save
+      redirect_to recipe_path(@recipe)
     else
-      redner 'new'
+      render 'new'
     end
   end
 
   def show
-    @recipe = Recipe.find_by(params[:id])
+    @recipe = Recipe.find_by_id(params[:id])
   end
 
   private
