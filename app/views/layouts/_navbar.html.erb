@@ -15,7 +15,7 @@
       <% else %>
         <li class="nav-item">
           <!-- link it to nested user/recipes path -->
-          <%= link_to "My Recipes", recipes_path, class: "navbar-brand" %>
+          <%= link_to "My Recipes", user_recipes_path(current_user), class: "navbar-brand" %>
         </li>
         <li class="nav-item">
           <%= link_to "Ingredients List", ingredients_path, class: "navbar-brand" %>
