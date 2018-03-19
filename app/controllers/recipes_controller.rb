@@ -5,7 +5,8 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @ingredients = 6.times.collect { @recipe.recipe_ingredients.build }
+    ingredients = @recipe.ingredients.build
+    ingredients.recipe_ingredients.build
   end
 
   def create
@@ -44,6 +45,6 @@ class RecipesController < ApplicationController
   private
   # need to add ingredients id as a parameter
   def recipe_params
-    params.require(:recipe).permit(:name, :rating, :description, :cook_time, :user_id, ingredient_ids: [])
+    params.require(:recipe).permit(:name, :rating, :description, :cook_time, :user_id, ingredient_ids: [], :ingredient_attributes => [:name])
   end
 end

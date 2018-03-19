@@ -14,7 +14,15 @@
   <%= f.label :description %>:
   <%= f.text_area :description %><br />
 
-  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name%>
+
+  <%= f.fields_for :ingredients do |ff| %>
+    <%=ff.label :name %>
+    <%=ff.text_field :name %>
+    <%= ff.fields_for :recipe_ingredients do |fff| %>
+      <%= fff.label :quantity %>
+      <%= fff.text_field :quantity %>
+    <% end %>
+  <% end %>
 
   <%= f.hidden_field :user_id, :value => current_user.id %><br />
 
