@@ -27,12 +27,16 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.new
+    @recipe = Recipe.find_by_id(params[:id])
+    if current_user.id != @recipe.user.id
+      #need to flash error message
+      redirect_to root_path
+    end
   end
 
   def update
-    @recipe = Recipe.update(recipe_params)
-    if @recipe.save
+    @recipe = Recipe.find_by_id(params[:id])
+    if @recipe.update(recipe_params)
       # have flash message indicating it was updated successfully
       redirect_to recipe_path(@recipe)
     else
@@ -43,7 +47,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe = Recipe.find_by_id(params[:id])
     @recipe.destroy
-    redirect_to recipes_path
+    redirect_to user_recipes_path(current_user)
   end
 
   private

@@ -1,8 +1,1 @@
-<h1><%=@recipe.name%></h1><br>
-Recipe by: <%=@recipe.user.email%> <br>
-Rating: <%=@recipe.rating%> <br>
-Cook Time: <%=@recipe.cook_time%> <br>
-Description: <%=@recipe.description%> <br>
-<% @recipe.ingredients.each do |ingredient| %>
-  <li><%=ingredient.name%></li>
-<% end %>
+<%= render(@recipe) %>

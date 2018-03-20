@@ -1,11 +1,23 @@
-<h4><%= recipe.name %></h4>
+<% if is_index? %>
+  <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
+<% else %>
+  <h4><%= recipe.name %></h4>
+<% end %>
+
 Rating: <%= recipe.rating %> / 5 <br>
 Recipe by: <%= recipe.user.email %> <br>
 Cook Time: <%= recipe.cook_time %> Minutes <br>
-Ingredients:
-<% recipe.ingredients.each do |ingredient| %>
-  <%=ingredient.name%>
+
+<% if is_show?(recipe) %>
+  Description: <%= recipe.description %> <br>
+  Ingredients:
+  <% recipe.ingredients.each do |ingredient| %>
+    <li> <%= ingredient.name %> </li>
+  <% end %>
 <% end %>
 <br>
-<%= link_to "Edit", edit_recipe_path(recipe) %>
-<%= link_to "Delete", recipe, method: :delete %>
+
+<% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
+  <%= link_to "Edit", edit_recipe_path(recipe) %>
+  <%= link_to "Delete", recipe, method: :delete %>
+<% end %>
