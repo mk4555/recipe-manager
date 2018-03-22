@@ -25,6 +25,6 @@ class IngredientsController < ApplicationController
 
   # need to add recipe id as a parameter
   def ingredient_params
-    params.require(:ingredient).permit(:name)
+    params.require(:ingredient).permit(:name, recipe_ingredient: [:quantity])
   end
 end

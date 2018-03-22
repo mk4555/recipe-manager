@@ -9,7 +9,7 @@ class Recipe < ActiveRecord::Base
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
 
-  accepts_nested_attributes_for :ingredients
+  accepts_nested_attributes_for :recipe_ingredients, reject_if: proc {|attributes| attributes['name'].blank?}
 
   scope :highest_rating, -> {order(rating: :desc)}
   scope :lowest_rating, -> {order(rating: :asc)}

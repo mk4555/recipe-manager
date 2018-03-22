@@ -9,8 +9,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    ingredients = @recipe.ingredients.build
-    ingredients.recipe_ingredients.build
+    5.times.collect {@recipe.recipe_ingredients.build}
   end
 
   def create
@@ -23,11 +22,15 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find_by_id(params[:id])
+    set_recipe
   end
 
   def edit
-    @recipe = Recipe.find_by_id(params[:id])
+    set_recipe
+    5.times.collect {@recipe.recipe_ingredients.build}
+    @recipe.recipe_ingredients.each do |f|
+      f.build_ingredient
+    end
     if current_user.id != @recipe.user.id
       #need to flash error message
       redirect_to root_path
@@ -35,7 +38,7 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe = Recipe.find_by_id(params[:id])
+    set_recipe
     if @recipe.update(recipe_params)
       # have flash message indicating it was updated successfully
       redirect_to recipe_path(@recipe)
@@ -52,7 +55,13 @@ class RecipesController < ApplicationController
 
   private
   # need to add ingredients id as a parameter
-  def recipe_params
-    params.require(:recipe).permit(:name, :rating, :description, :cook_time, :user_id, ingredient_ids: [], :ingredient_attributes => [:name])
+
+  def set_recipe
+    @recipe = Recipe.find_by_id(params[:id])
   end
+
+  def recipe_params
+    params.require(:recipe).permit(:name, :rating, :description, :cook_time, :user_id, :recipe_ingredient_attributes => [:id, :quantity, :ingredient_id])
+  end
+
 end

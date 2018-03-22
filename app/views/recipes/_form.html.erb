@@ -14,13 +14,12 @@
   <%= f.label :description %>:
   <%= f.text_area :description %><br />
 
-
-  <%= f.fields_for :ingredients do |ff| %>
-    <%=ff.label :name %>
-    <%=ff.text_field :name %>
-    <%= ff.fields_for :recipe_ingredients do |fff| %>
-      <%= fff.label :quantity %>
-      <%= fff.text_field :quantity %>
+  <%= f.fields_for :recipe_ingredients do |ri| %>
+    <%= ri.label :quantity %>
+    <%= ri.text_field :quantity %>
+    <%= ri.fields_for :ingredient do |i| %>
+      <%= i.label :name %>
+      <%= i.text_field :name %> <br>
     <% end %>
   <% end %>
 
