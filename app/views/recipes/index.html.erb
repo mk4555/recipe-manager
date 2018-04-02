@@ -1,6 +1,10 @@
 <%=link_to "Create New Recipe", new_recipe_path%>
 <% if is_user_nested? %>
-  <h1>My Recipes</h1>
+  <% if current_user.id == params[:user_id].to_f %>
+    <h1>My Recipes</h1>
+  <% else %>
+    <h1> <%= User.find_by_id(params[:user_id]).email %>'s Recipes </h1>
+  <% end %>
 <% else %>
   <h1>Recipes</h1>
 <% end %>
