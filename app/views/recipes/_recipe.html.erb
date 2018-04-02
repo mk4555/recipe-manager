@@ -1,7 +1,7 @@
 <% if is_index? %>
-  <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
+  <h4><%= link_to recipe.capitalized_name, recipe_path(recipe) %></h4>
 <% else %>
-  <h4><%= recipe.name %></h4>
+  <h4><%= recipe.capitalized_name %></h4>
 <% end %>
 
 Rating: <%= recipe.rating %> / 5 <br>
@@ -11,9 +11,8 @@ Cook Time: <%= recipe.cook_time %> Minutes <br>
 <% if is_show?(recipe) %>
   Description: <%= recipe.description %> <br>
   Ingredients:
-  <% recipe.ingredients.each do |ingredient| %>
-  <!-- how do i make the model return the capitalized name -->
-    <li> <%= ingredient.name.capitalize %> </li>
+  <% @recipe.recipe_ingredients.each do |ri| %>
+    <li> <%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
   <% end %>
 <% end %>
 <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>

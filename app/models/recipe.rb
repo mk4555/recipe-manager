@@ -14,11 +14,21 @@ class Recipe < ActiveRecord::Base
   scope :highest_rating, -> {order(rating: :desc)}
   scope :lowest_rating, -> {order(rating: :asc)}
 
+  def downcase_name
+    self.name = self.name.downcase
+  end
+
+  def capitalized_name
+    self.name.capitalize
+  end
+  
   def clear_ingredients
-    binding.pry
-    self.ingredients.size.times do
-      ingredient = RecipeIngredient.find_by(recipe_id: self.id)
-      ingredient.delete
+    if self.ingredients.size > 0
+      self.ingredients.size.times do
+        ingredient = RecipeIngredient.find_by(recipe_id: self.id)
+        ingredient.delete
+      end
+      self.save
     end
   end
 

@@ -3,16 +3,16 @@
   <%= render "shared/errors", obj: @recipe%>
 
   <%= f.label :name %>:
-  <%= f.text_field :name %><br>
+  <%= f.text_field :name%><br />
 
-  <%= f.label :rating %> (1-5):
-  <%= f.text_field :rating %><br>
+  <%= f.label :rating %>:
+  <%= f.select :rating, options_for_select(1..5) %> <br />
 
   <%= f.label :cook_time %> (in minutes):
-  <%= f.text_field :cook_time %><br>
+  <%= f.text_field :cook_time%><br />
 
   <%= f.label :description %>:
-  <%= f.text_area :description %><br>
+  <%= f.text_area :description%><br />
 
   <%= f.fields_for :recipe_ingredients, @ingredients do |ri| %>
     <%= ri.label :quantity %>
@@ -21,10 +21,10 @@
     <%= ri.fields_for :ingredient, @recipe.ingredients.build do |ingredient| %>
     Or Create Ingredient: <%=ingredient.label :name %> <%= ingredient.text_field :name %>
     <% end %>
-    <br>
+    <br />
   <% end %>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %><br>
+  <%= f.hidden_field :user_id, :value => current_user.id %><br />
 
   <%= f.submit "Submit Recipe"%>
 <% end %>

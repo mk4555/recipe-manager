@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+
   def index
     if params[:user_id]
       @recipes = current_user.recipes.all
@@ -14,6 +16,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.create(recipe_params)
+    @recipe.name = @recipe.name.downcase
     if @recipe.save
       @recipe.add_ingredients(recipe_ingredients_params)
       redirect_to recipe_path(@recipe)
@@ -23,12 +26,12 @@ class RecipesController < ApplicationController
   end
 
   def show
-    set_recipe
   end
 
   def edit
     set_recipe
     @ingredients = @recipe.recipe_ingredients
+    5.times.collect {@recipe.recipe_ingredients.build}
 
     if current_user.id != @recipe.user.id
       #need to flash error message
@@ -37,7 +40,6 @@ class RecipesController < ApplicationController
   end
 
   def update
-    set_recipe
     if @recipe.update(recipe_params)
       @recipe.add_ingredients(recipe_ingredients_params)
       # have flash message indicating it was updated successfully
@@ -48,7 +50,6 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find_by_id(params[:id])
     @recipe.destroy
     redirect_to user_recipes_path(current_user)
   end

@@ -1,4 +1,4 @@
-<h4><%= link_to ingredient.name, ingredient_path(ingredient) %></h4>
+<h4><%= link_to ingredient.capitalized_name, ingredient_path(ingredient) %></h4>
 <% ingredient.recipes.each do |recipe| %>
-  <li><%= link_to recipe.name, recipe_path(recipe) %></li>
+  <li><%= link_to recipe.capitalized_name, recipe_path(recipe) %></li>
 <% end %>

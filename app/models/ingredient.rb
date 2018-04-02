@@ -9,4 +9,7 @@ class Ingredient < ActiveRecord::Base
     self.name = self.name.downcase
   end
 
+  def capitalized_name
+    self.name.capitalize
+  end
 end
