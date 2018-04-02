@@ -1,5 +1,7 @@
 class IngredientsController < ApplicationController
   before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
   def index
     @ingredients = Ingredient.all
   end
@@ -22,6 +24,9 @@ class IngredientsController < ApplicationController
   end
 
   def edit
+    if !current_user.admin?
+      redirect_to ingredients_path
+    end
   end
 
   def update

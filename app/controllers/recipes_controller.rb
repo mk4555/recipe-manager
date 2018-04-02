@@ -55,7 +55,6 @@ class RecipesController < ApplicationController
   end
 
   private
-  # need to add ingredients id as a parameter
 
   def set_recipe
     @recipe = Recipe.find_by_id(params[:id])

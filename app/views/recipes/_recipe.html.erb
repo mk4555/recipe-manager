@@ -15,6 +15,7 @@ Cook Time: <%= recipe.cook_time %> Minutes <br>
     <li> <%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
   <% end %>
 <% end %>
+
 <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
   <%= link_to "Edit", edit_recipe_path(recipe) %>
   <%= link_to "Delete", recipe, method: :delete %>

@@ -1,4 +1,13 @@
-<h4><%= link_to ingredient.capitalized_name, ingredient_path(ingredient) %></h4>
-<% ingredient.recipes.each do |recipe| %>
-  <li><%= link_to recipe.capitalized_name, recipe_path(recipe) %></li>
+<% if current_page?(ingredients_path) %>
+  <h4><%= link_to ingredient.capitalized_name, ingredient_path(ingredient) %></h4>
+<% else %>
+  <h1><%= ingredient.capitalized_name %> </h1>
+  <% ingredient.recipes.each do |recipe| %>
+    <li><%= link_to recipe.capitalized_name, recipe_path(recipe) %></li>
+  <% end %>
+<% end %>
+
+<% if current_user.admin? %>
+  <%= link_to "Edit", edit_ingredient_path(@ingredient) %>
+  <%= link_to "Delete", @ingredient, method: :delete %>
 <% end %>
