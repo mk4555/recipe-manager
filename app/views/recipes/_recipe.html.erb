@@ -12,7 +12,8 @@ Cook Time: <%= recipe.cook_time %> Minutes <br>
   Description: <%= recipe.description %> <br>
   Ingredients:
   <% recipe.ingredients.each do |ingredient| %>
-    <li> <%= ingredient.name %> </li>
+  <!-- how do i make the model return the capitalized name -->
+    <li> <%= ingredient.name.capitalize %> </li>
   <% end %>
 <% end %>
 <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>

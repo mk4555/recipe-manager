@@ -3,27 +3,28 @@
   <%= render "shared/errors", obj: @recipe%>
 
   <%= f.label :name %>:
-  <%= f.text_field :name %><br />
+  <%= f.text_field :name %><br>
 
   <%= f.label :rating %> (1-5):
-  <%= f.text_field :rating %><br />
+  <%= f.text_field :rating %><br>
 
   <%= f.label :cook_time %> (in minutes):
-  <%= f.text_field :cook_time %><br />
+  <%= f.text_field :cook_time %><br>
 
   <%= f.label :description %>:
-  <%= f.text_area :description %><br />
+  <%= f.text_area :description %><br>
 
-  <%= f.fields_for :recipe_ingredients do |ri| %>
+  <%= f.fields_for :recipe_ingredients, @ingredients do |ri| %>
     <%= ri.label :quantity %>
     <%= ri.text_field :quantity %>
-    <%= ri.fields_for :ingredient do |i| %>
-      <%= i.label :name %>
-      <%= i.text_field :name %> <br>
+    Select Ingredient: <%= ri.collection_select :ingredient_id, Ingredient.order('name ASC').all, :id, :name, include_blank: 'Select Ingredient' %>
+    <%= ri.fields_for :ingredient, @recipe.ingredients.build do |ingredient| %>
+    Or Create Ingredient: <%=ingredient.label :name %> <%= ingredient.text_field :name %>
     <% end %>
+    <br>
   <% end %>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %><br />
+  <%= f.hidden_field :user_id, :value => current_user.id %><br>
 
   <%= f.submit "Submit Recipe"%>
 <% end %>
