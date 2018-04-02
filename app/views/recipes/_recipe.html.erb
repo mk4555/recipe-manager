@@ -5,7 +5,7 @@
 <% end %>
 
 Rating: <%= recipe.rating %> / 5 <br>
-Recipe by: <%= recipe.user.email %> <br>
+Recipe by: <%= link_to recipe.user.email, user_recipes_path(recipe.user) %> <br>
 Cook Time: <%= recipe.cook_time %> Minutes <br>
 
 <% if is_show?(recipe) %>
