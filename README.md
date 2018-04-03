@@ -1,6 +1,6 @@
 # Recipe Manager Project
 
-This is a Ruby on Rails App designed to keep track of recipes with basic CRUD principles. Any user can sign up with an email and a password, or via Facebook.
+This is a Ruby on Rails App designed to keep track of recipes with basic CRUD principles. Any user can sign up with an email and a password, or via Facebook. Any user can then create recipes with ingredients. All users can view other people's recipes, but only admins can edit and delete ingredients. 
 
 # Installation
 
