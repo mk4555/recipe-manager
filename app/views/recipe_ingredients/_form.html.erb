@@ -1,0 +1,12 @@
+<%= form_for [@recipe, @ingredients] do |ri| %>
+  <%= ri.label :quantity %>
+  <%= ri.text_field :quantity %>
+
+  <%= ri.fields_for :ingredient, @recipe.ingredients.build do |ingredient| %>
+    <%=ingredient.label :name %> <%= ingredient.text_field :name %>
+  <% end %>
+
+  <%= ri.hidden_field :recipe_id, :value => @recipe.id %><br />
+  <%= ri.submit "Add Ingredient" %>
+  <br />
+<% end %>
