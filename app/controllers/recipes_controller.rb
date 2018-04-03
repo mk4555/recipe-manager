@@ -4,6 +4,12 @@ class RecipesController < ApplicationController
   def index
     if params[:user_id]
       @recipes = User.find_by_id(params[:user_id]).recipes.all
+    elsif !params[:rating].blank?
+      if params[:rating] == "Highest Rating"
+        @recipes = Recipe.highest_rating
+      elsif params[:rating] == "Lowest Rating"
+        @recipes = Recipe.lowest_rating
+      end
     else
       @recipes = Recipe.all
     end
