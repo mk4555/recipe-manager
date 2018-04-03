@@ -12,5 +12,4 @@ Rails.application.routes.draw do
   end
 
   resources :ingredients
-  # resources :users, only: [:index, :show]
 end

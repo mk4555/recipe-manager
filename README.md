@@ -1,24 +1,31 @@
-# README
+# Recipe Manager Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Ruby on Rails App designed to keep track of recipes with basic CRUD principles. Any user can sign up with an email and a password, or via Facebook.
 
-Things you may want to cover:
+# Installation
 
-* Ruby version
+First, fork the repo and install all gems on your computer via this command.
 
-* System dependencies
+```
+bundle install
+```
 
-* Configuration
+Then, make sure all the database is available via this command.
 
-* Database creation
+```
+rake db:migrate
+```
 
-* Database initialization
+Finally, with everything set up, start the server on your terminal and open up the server on your browser.
 
-* How to run the test suite
+```
+rails s
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+# Contribution
 
-* Deployment instructions
+Contact mk4555@nyu.edu for any contribution
 
-* ...
+# License
+
+This project has been licensed under the MIT open source license.
