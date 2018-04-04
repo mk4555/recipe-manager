@@ -2,7 +2,7 @@ class RecipeIngredientsController < ApplicationController
   before_action :set_recipe
 
   def new
-    @ingredients = @recipe.recipe_ingredients.build
+    @ingredient = @recipe.recipe_ingredients.build
   end
 
   def create
@@ -11,6 +11,8 @@ class RecipeIngredientsController < ApplicationController
     @ingredient.ingredient_id = i.id
     if @ingredient.save
       redirect_to recipe_path(@recipe)
+    else
+      render 'new', locals: {recipe: @recipe, ingredient: @ingredient}
     end
   end
 

@@ -1,4 +1,5 @@
-<%= form_for [@recipe, @ingredients] do |ri| %>
+<%= form_for [@recipe, @ingredient] do |ri| %>
+  <%= render "shared/errors", obj: @ingredient%>
   <%= ri.label :quantity %>
   <%= ri.text_field :quantity %>
 
