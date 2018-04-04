@@ -40,7 +40,6 @@ class RecipesController < ApplicationController
     5.times.collect {@recipe.recipe_ingredients.build}
 
     if current_user.id != @recipe.user.id
-      #need to flash error message
       redirect_to root_path
     end
   end
@@ -48,10 +47,9 @@ class RecipesController < ApplicationController
   def update
     if @recipe.update(recipe_params)
       @recipe.add_ingredients(recipe_ingredients_params)
-      # have flash message indicating it was updated successfully
       redirect_to recipe_path(@recipe)
     else
-      render 'edit'
+      render 'edit', locals: {ingredients: 5.times.collect{@recipe.recipe_ingredients.build}}
     end
   end
 
