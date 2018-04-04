@@ -27,7 +27,7 @@ class RecipesController < ApplicationController
       @recipe.add_ingredients(recipe_ingredients_params)
       redirect_to recipe_path(@recipe)
     else
-      render 'new'
+      render 'new', locals: {ingredients: 5.times.collect{@recipe.recipe_ingredients.build}}
     end
   end
 
