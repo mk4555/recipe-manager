@@ -1,6 +1,6 @@
 <%= form_for @recipe do |f| %>
 
-  <%= render "shared/errors", obj: f.obj%>
+  <%= render "shared/errors", obj: @recipe%>
 
   <%= f.label :name %>:
   <%= f.text_field :name%><br />
