@@ -32,10 +32,12 @@ class RecipesController < ApplicationController
   end
 
   def show
+    if (@recipe == nil)
+      redirect_to root_path
+    end
   end
 
   def edit
-    set_recipe
     @ingredients = @recipe.recipe_ingredients
     5.times.collect {@recipe.recipe_ingredients.build}
 
