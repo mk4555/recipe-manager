@@ -15,6 +15,11 @@ Cook Time: <%= recipe.cook_time %> Minutes <br>
     <li> <%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
   <% end %>
 <% end %>
+<br />
+Directions:
+<% recipe.directions.each do |d| %>
+  <li><%= d.direction %></li>
+<% end %>
 
 <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
   <%= link_to "Add Ingredient", new_recipe_recipe_ingredient_path(recipe, recipe.recipe_ingredients) %> <br />

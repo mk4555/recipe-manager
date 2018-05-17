@@ -18,6 +18,7 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @ingredients = 5.times.collect {@recipe.recipe_ingredients.build}
+    @directions = 6.times.collect {@recipe.directions.build}
   end
 
   def create
@@ -25,6 +26,7 @@ class RecipesController < ApplicationController
     @recipe.name = @recipe.name.downcase
     if @recipe.save
       @recipe.add_ingredients(recipe_ingredients_params)
+      @recipe.add_directions(directions_params)
       redirect_to recipe_path(@recipe)
     else
       render 'new', locals: {ingredients: 5.times.collect{@recipe.recipe_ingredients.build}}
@@ -72,6 +74,10 @@ class RecipesController < ApplicationController
 
   def recipe_ingredients_params
     params.require(:recipe).permit(recipe_ingredients_attributes: [:quantity, :ingredient_id, ingredient: [:name]])
+  end
+
+  def directions_params
+    params.require(:recipe).permit(directions_attributes: [:direction])
   end
 
 end

@@ -24,6 +24,11 @@
     <br />
   <% end %>
 
+  <%= f.fields_for :directions, @directions do |d| %>
+    <%= d.label :direction %>
+    <%= d.text_field :direction %><br />
+  <% end %>
+
   <%= f.hidden_field :user_id, :value => current_user.id %><br />
 
   <%= f.submit "Submit Recipe"%>

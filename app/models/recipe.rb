@@ -6,11 +6,12 @@ class Recipe < ActiveRecord::Base
   validates :cook_time, numericality: {greater_than: 0}
   validates :description, presence: true
 
+  has_many :directions
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
 
   accepts_nested_attributes_for :recipe_ingredients, reject_if: lambda {|attributes| attributes['name'].blank?}
-
+  accepts_nested_attributes_for :directions, reject_if: lambda {|attributes| attributes['direction'].blank?}
   scope :highest_rating, -> {order(rating: :desc)}
   scope :lowest_rating, -> {order(rating: :asc)}
 
@@ -21,7 +22,7 @@ class Recipe < ActiveRecord::Base
   def capitalized_name
     self.name.capitalize
   end
-  
+
   def clear_ingredients
     if self.ingredients.size > 0
       self.ingredients.size.times do
@@ -48,4 +49,11 @@ class Recipe < ActiveRecord::Base
     self.save
   end
 
+  def add_directions(params)
+    params[:directions_attributes].values.each do |d|
+      if d[:direction].present?
+        direction = Direction.create(direction: d[:direction], recipe_id: self.id)
+      end
+    end
+  end
 end
