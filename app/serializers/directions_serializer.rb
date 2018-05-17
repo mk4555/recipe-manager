@@ -1,3 +1,3 @@
 class DirectionsSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :direction
 end
