@@ -1,5 +1,5 @@
 $(function() {
-  $('#hello').on('click',function(e){
+  $('#test').on('click',function(e){
     $.ajax({
       method: "GET",
       url: '/ingredients'
