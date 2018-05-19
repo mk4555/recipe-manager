@@ -1,10 +1,7 @@
 $(function() {
   $('#test').on('click',function(e){
-    $.ajax({
-      method: "GET",
-      url: '/ingredients'
-    }).done(function(data){
-      console.log(data)
+    $.get('/ingredients').success(function(resp){
+      console.log(resp)
     })
   })
 })
