@@ -12,6 +12,7 @@ class Recipe < ActiveRecord::Base
 
   accepts_nested_attributes_for :recipe_ingredients, reject_if: lambda {|attributes| attributes['name'].blank?}
   accepts_nested_attributes_for :directions, reject_if: lambda {|attributes| attributes['direction'].blank?}
+  
   scope :highest_rating, -> {order(rating: :desc)}
   scope :lowest_rating, -> {order(rating: :asc)}
 
