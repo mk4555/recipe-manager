@@ -42,7 +42,7 @@ class RecipesController < ApplicationController
   def edit
     @ingredients = @recipe.recipe_ingredients
     5.times.collect {@recipe.recipe_ingredients.build}
-
+    6.times.collect {@recipe.directions.build}
     if current_user.id != @recipe.user.id
       redirect_to root_path
     end
@@ -51,6 +51,7 @@ class RecipesController < ApplicationController
   def update
     if @recipe.update(recipe_params)
       @recipe.add_ingredients(recipe_ingredients_params)
+      @recipe.add_directions(directions_params)
       redirect_to recipe_path(@recipe)
     else
       render 'edit', locals: {ingredients: 5.times.collect{@recipe.recipe_ingredients.build}}

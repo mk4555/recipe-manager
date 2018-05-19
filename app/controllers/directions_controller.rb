@@ -4,9 +4,6 @@ class DirectionsController < ApplicationController
     @directions = 6.times.collect {@recipe.directions.build}
   end
 
-  def create
-  end
-
   private
 
   def set_recipe

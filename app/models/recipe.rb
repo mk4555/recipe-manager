@@ -33,6 +33,16 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def clear_directions
+    if self.directions.size > 0
+      self.directions.size.times do
+        direction = Direction.find_by(recipe_id: self.id)
+        direction.delete
+      end
+      self.save
+    end
+  end
+
   def add_ingredients(params)
     clear_ingredients
     params[:recipe_ingredients_attributes].values.each do |ri|
@@ -50,6 +60,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def add_directions(params)
+    clear_directions
     params[:directions_attributes].values.each do |d|
       if d[:direction].present?
         direction = Direction.create(direction: d[:direction], recipe_id: self.id)
