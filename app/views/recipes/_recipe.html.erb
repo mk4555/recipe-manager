@@ -14,12 +14,18 @@ Cook Time: <%= recipe.cook_time %> Minutes <br>
   <% @recipe.recipe_ingredients.each do |ri| %>
     <li> <%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
   <% end %>
+
+  Directions:
+  <% recipe.directions.each do |d| %>
+    <li><%= d.direction %></li>
+  <% end %>
+<% else %>
+  <button class="js-ingredients" data-id="<%= recipe.id %>">Ingredients</button>
+  <button class="js-directions" data-id="<%= recipe.id %>">Directions</button>
 <% end %>
 <br />
-Directions:
-<% recipe.directions.each do |d| %>
-  <li><%= d.direction %></li>
-<% end %>
+
+
 
 <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
   <%= link_to "Add Ingredient", new_recipe_recipe_ingredient_path(recipe, recipe.recipe_ingredients) %> <br />

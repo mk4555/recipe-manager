@@ -37,6 +37,7 @@ class RecipesController < ApplicationController
     if (@recipe == nil)
       redirect_to root_path
     end
+    render json: @recipe
   end
 
   def edit
