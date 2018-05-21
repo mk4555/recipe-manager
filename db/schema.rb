@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180521125713) do
-
-  create_table "comments", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "user_id"
-    t.text "body"
-    t.index ["recipe_id"], name: "index_comments_on_recipe_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 20180418152142) do
 
   create_table "directions", force: :cascade do |t|
     t.integer "recipe_id"
