@@ -4,10 +4,17 @@ class IngredientsController < ApplicationController
 
   def index
     @ingredients = Ingredient.all
-    render :json => @ingredients
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @ingredients}
+    end
   end
 
   def show
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @ingredient}
+    end
   end
 
   def new
@@ -41,7 +48,7 @@ class IngredientsController < ApplicationController
   def destroy
     @ingredient.recipe_ingredients.size.times do
       recipe = RecipeIngredient.find_by(ingredient_id: @ingredient.id)
-      recipe.delete
+      recipe.destroy
     end
     @ingredient.destroy
     redirect_to ingredients_path

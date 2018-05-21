@@ -16,8 +16,8 @@ Cook Time: <%= recipe.cook_time %> Minutes <br>
   <% end %>
 
   Directions:
-  <% recipe.directions.each do |d| %>
-    <li><%= d.direction %></li>
+  <% recipe.directions.each_with_index do |d,i| %>
+    <li><%=i + 1 %>. <%= d.direction %></li>
   <% end %>
 <% else %>
   <button class="js-ingredients" data-id="<%= recipe.id %>">Ingredients</button>
