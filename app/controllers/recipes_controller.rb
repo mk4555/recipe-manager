@@ -13,6 +13,10 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all
     end
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @recipes}
+    end
   end
 
   def new
@@ -36,6 +40,10 @@ class RecipesController < ApplicationController
   def show
     if (@recipe == nil)
       redirect_to root_path
+    end
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @recipe}
     end
   end
 
