@@ -13,6 +13,5 @@
     <%= submit_tag "Filter" %>
   <% end %>
 <% end %>
-<button id='test'>Hello</button>
 <div id='here'></div>
 <%= render(@recipes.order(name: :asc)) || "There are no recipes!" %>
