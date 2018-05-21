@@ -3,7 +3,8 @@ class RecipesController < ApplicationController
 
   def index
     if params[:user_id]
-      @recipes = User.find_by_id(params[:user_id]).recipes.all
+      @user = User.find_by_id(params[:user_id])
+      @recipes = @user.recipes.all
     elsif !params[:rating].blank?
       if params[:rating] == "Highest Rating"
         @recipes = Recipe.highest_rating

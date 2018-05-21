@@ -3,15 +3,14 @@
   <% if current_user.id == params[:user_id].to_f %>
     <h1>My Recipes</h1>
   <% else %>
-    <h1> <%= User.find_by_id(params[:user_id]).email %>'s Recipes </h1>
+    <%= render(@user) %>
   <% end %>
 <% else %>
   <h1>Recipes</h1>
   <%= form_tag("/recipes", method: "get") do %>
-    <!-- new code -->
     <%= select_tag "rating", options_for_select(["Highest Rating", "Lowest Rating"]), include_blank: true %>
     <%= submit_tag "Filter" %>
   <% end %>
+  <%= render(@recipes.order(name: :asc)) || "There are no recipes!" %>
 <% end %>
 <div id='here'></div>
-<%= render(@recipes.order(name: :asc)) || "There are no recipes!" %>

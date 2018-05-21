@@ -14,4 +14,8 @@ class User < ApplicationRecord
     end
   end
 
+  def recipe_count
+    self.recipes.all.size
+  end
+
 end
