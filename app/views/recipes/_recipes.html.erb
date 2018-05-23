@@ -1,0 +1,6 @@
+<%= form_tag("/recipes", method: "get") do %>
+  <%= select_tag "rating", options_for_select(["Highest Rating", "Lowest Rating"]), include_blank: true %>
+  <%= submit_tag "Filter" %>
+<% end %>
+
+<%= render(recipes.order(name: :asc)) || "There are no recipes!" %>

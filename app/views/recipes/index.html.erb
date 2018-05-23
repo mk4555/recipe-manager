@@ -1,16 +1,13 @@
 <%=link_to "Create New Recipe", new_recipe_path%>
 <% if is_user_nested? %>
-  <% if current_user.id == params[:user_id].to_f %>
+  <% if recipes_owner? %>
     <h1>My Recipes</h1>
+    <%= render partial: "recipes", locals: {recipes: @recipes} %>
   <% else %>
     <%= render(@user) %>
   <% end %>
 <% else %>
   <h1>Recipes</h1>
-  <%= form_tag("/recipes", method: "get") do %>
-    <%= select_tag "rating", options_for_select(["Highest Rating", "Lowest Rating"]), include_blank: true %>
-    <%= submit_tag "Filter" %>
-  <% end %>
-  <%= render(@recipes.order(name: :asc)) || "There are no recipes!" %>
+  <%= render partial: "recipes", locals: {recipes: @recipes} %>
 <% end %>
 <div id='here'></div>

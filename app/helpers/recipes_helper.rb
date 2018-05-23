@@ -8,6 +8,10 @@ module RecipesHelper
     params[:user_id]
   end
 
+  def recipes_owner?
+    current_user.id == params[:user_id].to_f
+  end
+
   def is_show?(recipe)
     current_page?(recipe_path(recipe))
   end
