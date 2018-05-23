@@ -19,17 +19,14 @@ Cook Time: <%= recipe.cook_time %> Minutes <br>
   <% recipe.directions.each_with_index do |d,i| %>
     <li><%=i + 1 %>. <%= d.direction %></li>
   <% end %>
-<% else %>
-  <button class="js-ingredients" data-id="<%= recipe.id %>">Ingredients</button>
-  <button class="js-directions" data-id="<%= recipe.id %>">Directions</button>
+  <br>
+  <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
+    <%= link_to "Add Ingredient", new_recipe_recipe_ingredient_path(recipe, recipe.recipe_ingredients) %> <br />
+    <%= link_to "Edit", edit_recipe_path(recipe) %>
+    <%= link_to "Delete", recipe, method: :delete %>
+  <% end %>
+  <br>
+  <button class='js-next-recipe' data-id="<%= recipe.id %>">Next Recipe </button>
+  <br>
 <% end %>
 <br />
-
-
-
-<% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
-  <%= link_to "Add Ingredient", new_recipe_recipe_ingredient_path(recipe, recipe.recipe_ingredients) %> <br />
-  <%= link_to "Edit", edit_recipe_path(recipe) %>
-  <%= link_to "Delete", recipe, method: :delete %>
-<% end %>
-<br>
