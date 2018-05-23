@@ -1,8 +1,20 @@
 $(function() {
   $(".js-show-recipes").on("click", function() {
     var id = $(this).data("id");
-    $.get("/user/" + id + "/recipes.json", function(data) {
+    $.get("/users/" + id + "/recipes.json", function(data) {
       console.log(data)
+
+
+
+      // <% if is_index? %>
+      //   <h4><%= link_to recipe.capitalized_name, recipe_path(recipe) %></h4>
+      // <% else %>
+      //   <h4><%= recipe.capitalized_name %></h4>
+      // <% end %>
+      //
+      // Rating: <%= recipe.rating %> / 5 <br>
+      // Recipe by: <%= link_to recipe.user.email, user_recipes_path(recipe.user) %> <br>
+      // Cook Time: <%= recipe.cook_time %> Minutes <br>
 
       // var inventoryText = "<strong>Available</strong>"
       // if (data["inventory"] === 0) {
@@ -19,7 +31,7 @@ $(function() {
     });
   });
 });
-// 
+//
 // <% if is_index? %>
 //   <h4><%= link_to recipe.capitalized_name, recipe_path(recipe) %></h4>
 // <% else %>
