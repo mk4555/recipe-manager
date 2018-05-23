@@ -1,4 +1,4 @@
 <h1> <%=@user.email %> </h1>
 <h2> Recipes submitted: <%= @user.recipe_count %> </h2>
 <button class='js-show-recipes' data-id='<%= @user.id %>'>Show Recipes</button>
-<div class='recipes'></div>
+<div id='recipes'></div>
