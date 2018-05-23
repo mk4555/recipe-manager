@@ -5,10 +5,10 @@ $(function() {
       // console.log(data)
       var recipe_details = ''
       data.forEach(function(recipe){
-        recipe_details += "<h4>" + recipe["name"] + "</h4>" +
-        "Rating: " + recipe["rating"] + "</br>" +
-        "Recipe by: " + recipe["user"]["email"] + "</br>" +
-        "Cook Time: " + recipe["cook_time"] + " Minutes" + "</br>"
+        recipe_details += `<h4><a href="/recipes/${recipe["id"]}"> ${recipe["name"].charAt(0).toUpperCase() + recipe["name"].slice(1)} </a></h4>` +
+        `Rating: ${recipe["rating"]}/5 <br/>`+
+        `Recipe by: ${recipe["user"]["email"]} <br/>` +
+        `Cook Time: ${recipe["cook_time"]} Minutes </br>`
       })
 
       // var recipe_name = "<h4><%= link_to " + data["name"] + ".capitalized_name, recipe_path(recipe) %></h4>"
