@@ -1,5 +1,5 @@
 <% if is_index? %>
-  <h4><%= link_to recipe.capitalized_name, recipe_path(recipe) %></h4>
+  <h4><%= link_to recipe.capitalized_name, user_recipe_path(recipe.user, recipe) %></h4>
 <% else %>
   <h4><%= recipe.capitalized_name %></h4>
 <% end %>

@@ -39,6 +39,9 @@ class RecipesController < ApplicationController
   end
 
   def show
+    if params[:user_id]
+      @recipe = Recipe.find_by(user_id: params[:user_id], id: params[:id])
+    end
     if (@recipe == nil)
       redirect_to root_path
     end
