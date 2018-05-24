@@ -11,15 +11,15 @@
 <% if is_show?(recipe) %>
   <div class="description"> Description: <%= recipe.description %> </div>
 
+  <h5>Ingredients:</h5>
   <div class='ingredients'>
-  Ingredients:
   <% @recipe.recipe_ingredients.each do |ri| %>
-    <li> <%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
+    <li><%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
   <% end %>
   </div>
 
+  <h5>Directions:</h5>
   <div class='directions'>
-  Directions:
   <% recipe.directions.each_with_index do |d,i| %>
     <li><%=i + 1 %>. <%= d.direction %></li>
   <% end %>

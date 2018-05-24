@@ -25,6 +25,16 @@ $(function () {
       $(".email").html(`Recipe by: <a href='/users/${recipe["user"]["id"]}/recipes'>${recipe["user"]["email"]}</a>`);
       $(".cookTime").html(`Cook Time: ${recipe["cook_time"]}`);
       $(".description").html(`Description: ${recipe["description"]}`);
+      ingredients = ""
+      recipe["recipe_ingredients"].forEach(function(ri, index){
+        ingredients += `<li>${ri["quantity"]} - ${recipe["ingredients"][index]["name"]}</li>`
+      })
+      $(".ingredients").html(ingredients)
+      directions = ""
+      recipe["directions"].forEach(function(direction,index){
+        directions += `<li>${index + 1}. ${direction["direction"]}`
+      })
+      $(".directions").html(directions)
       $(".js-next-recipe").attr("data-id", recipe["id"]);
     });
   });

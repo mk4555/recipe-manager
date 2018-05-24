@@ -5,4 +5,6 @@ class RecipeSerializer < ActiveModel::Serializer
 
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
+
+  has_many :directions
 end
