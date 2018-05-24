@@ -4,22 +4,27 @@
   <h4><%= recipe.capitalized_name %></h4>
 <% end %>
 
-Rating: <%= recipe.rating %> / 5 <br>
-Recipe by: <%= link_to recipe.user.email, user_recipes_path(recipe.user) %> <br>
-Cook Time: <%= recipe.cook_time %> Minutes <br>
+<div class="rating"> Rating: <%= recipe.rating %>/5 </div>
+<div class="email"> Recipe by: <%= link_to recipe.user.email, user_recipes_path(recipe.user) %> </div>
+<div class='cookTime'> Cook Time: <%= recipe.cook_time %> Minutes </div>
 
 <% if is_show?(recipe) %>
-  Description: <%= recipe.description %> <br>
+  <div class="description"> Description: <%= recipe.description %> </div>
+
+  <div class='ingredients'>
   Ingredients:
   <% @recipe.recipe_ingredients.each do |ri| %>
     <li> <%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
   <% end %>
+  </div>
 
+  <div class='directions'>
   Directions:
   <% recipe.directions.each_with_index do |d,i| %>
     <li><%=i + 1 %>. <%= d.direction %></li>
   <% end %>
-  <br>
+  </div>
+  
   <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
     <%= link_to "Add Ingredient", new_recipe_recipe_ingredient_path(recipe, recipe.recipe_ingredients) %> <br />
     <%= link_to "Edit", edit_recipe_path(recipe) %>

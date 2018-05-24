@@ -13,6 +13,6 @@ module RecipesHelper
   end
 
   def is_show?(recipe)
-    current_page?(recipe_path(recipe))
+    current_page?(recipe_path(recipe)) || current_page?(user_recipe_path(recipe.user, recipe))
   end
 end
