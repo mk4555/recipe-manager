@@ -3,4 +3,4 @@
   <%= submit_tag "Filter" %>
 <% end %>
 
-<%= render(recipes.order(name: :asc)) || "There are no recipes!" %>
+<%= render(recipes) || "There are no recipes!" %>

@@ -44,10 +44,11 @@ class RecipesController < ApplicationController
     end
     if (@recipe == nil)
       redirect_to root_path
-    end
-    respond_to do |format|
-      format.html {render :show}
-      format.json {render json: @recipe}
+    else
+      respond_to do |format|
+        format.html {render :show}
+        format.json {render json: @recipe}
+      end
     end
   end
 
