@@ -39,6 +39,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @review = Review.new
     if params[:user_id]
       @recipe = Recipe.find_by(user_id: params[:user_id], id: params[:id])
     end

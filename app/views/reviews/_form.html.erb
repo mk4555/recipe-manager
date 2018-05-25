@@ -1,0 +1,11 @@
+<h4>Reviews</h4>
+<%= form_for review do |f| %>
+  <%= render "shared/errors", obj: review%>
+  
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %><br />
+
+  <%= f.submit "Submit Review" %>
+<% end %>
