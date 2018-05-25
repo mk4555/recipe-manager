@@ -7,6 +7,7 @@ class Recipe < ActiveRecord::Base
   validates :description, presence: true
 
   has_many :directions
+  has_many :reviews
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
 
