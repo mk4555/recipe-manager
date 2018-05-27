@@ -1,43 +1,65 @@
-$(function() {
-  $(".js-show-recipes").on("click", function() {
-    let id = $(this).data("id");
-    $.get(`/users/${id}/recipes.json`, function(data) {
-      // console.log(data)
-      let recipe_details = '';
-      data.forEach(function(recipe){
-        recipe_details += `<h4><a href="/recipes/${recipe["id"]}"> ${recipe["name"].charAt(0).toUpperCase() + recipe["name"].slice(1)} </a></h4>` +
-        `Rating: ${recipe["rating"]}/5 <br/>`+
-        `Recipe by: ${recipe["user"]["email"]} <br/>` +
-        `Cook Time: ${recipe["cook_time"]} Minutes </br>`
-      });
-      $('#recipes').html(recipe_details);
-    });
-  });
+class Recipe{
+  constructor(recipe){
+    this.id = recipe.id;
+    this.name = recipe.name;
+    this.rating = recipe.rating;
+    this.cook_time = recipe.cook_time;
+    this.description = recipe.description;
+    this.user = recipe.user;
+    this.recipe_ingredients = recipe.recipe_ingredients;
+    this.ingredients = recipe.ingredients;
+    this.directions = recipe.directions;
+  }
+}
 
-  $(".js-next-recipe").on("click", function() {
-    let nextId = parseInt($(".js-next-recipe").attr("data-id")) + 1;
-    $.get(`/recipes/${nextId}.json`, function(recipe) {
-      let r = new Recipe(recipe)
-      let details = r.renderRecipe();
-      $(".recipe").html(details);
-      let igr = r.renderIngredients();
-      $(".ingredients").html(igr);
-      let directions = r.renderDirections();
-      $(".directions").html(directions)
-      $(".js-next-recipe").attr("data-id", recipe["id"]);
-    });
-  });
+Recipe.prototype.capitalizedName = function() {
+  return this.name.charAt(0).toUpperCase() + this.name.slice(1);
+}
 
-  $(".js-review-form").submit(function(event){
-    event.preventDefault()
-    let values = $(this).serialize();
-    let posting = $.post(`/reviews`,values)
-    posting.done(function(data){
-        let review = new Review(data);
-        console.log(review)
-        let reviewBody = review.renderReviewBody()
-        $(".reviews").append(reviewBody);
-    });
-  });
+Recipe.prototype.renderName = function(){
+  return `<h4> ${this.capitalizedName()}</h4>`
+}
 
-});
+Recipe.prototype.renderNameWithLink = function() {
+  return `<h4><a href="/recipes/${this.id}"> ${this.capitalizedName()} </a></h4>`
+}
+
+Recipe.prototype.renderRating = function(){
+return  `Rating: ${this.rating}/5 <br>`
+}
+
+Recipe.prototype.renderCookTime = function() {
+  return `Cook Time: ${this.cook_time} <br>`
+}
+
+Recipe.prototype.renderDescription = function() {
+  return `Description: ${this.description} <br>`
+}
+
+Recipe.prototype.renderCreator = function(){
+  return `Recipe by: <a href='/users/${this.user.id}/recipes'>${this.user.email}</a> <br>`
+}
+
+Recipe.prototype.renderRecipeWithDescription = function(){
+  return this.renderName() + this.renderRating() + this.renderCreator() + this.renderCookTime() + this.renderDescription();
+}
+
+Recipe.prototype.renderRecipeWithoutDescription = function(){
+  return this.renderNameWithLink() + this.renderRating() + this.renderCreator() + this.renderCookTime();
+}
+
+Recipe.prototype.renderIngredients = function() {
+  let list = ""
+  this.recipe_ingredients.forEach((ri,index) => {
+    list += `<li>${ri.quantity} - ${this.ingredients[index].name}</li>`
+  });
+  return list;
+}
+
+Recipe.prototype.renderDirections = function() {
+  let directions = ""
+  this.directions.forEach(function(direction, index){
+    directions += `<li>${index + 1}. ${direction["direction"]}`
+  });
+  return directions;
+}
