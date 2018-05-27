@@ -17,21 +17,12 @@ $(function() {
   $(".js-next-recipe").on("click", function() {
     let nextId = parseInt($(".js-next-recipe").attr("data-id")) + 1;
     $.get(`/recipes/${nextId}.json`, function(recipe) {
-      console.log(recipe)
-      $("#name").html(`<h4> ${recipe["name"].charAt(0).toUpperCase() + recipe["name"].slice(1)}</h4>`)
-      $(".rating").html(`Rating: ${recipe["rating"]}/5`);
-      $(".email").html(`Recipe by: <a href='/users/${recipe["user"]["id"]}/recipes'>${recipe["user"]["email"]}</a>`);
-      $(".cookTime").html(`Cook Time: ${recipe["cook_time"]}`);
-      $(".description").html(`Description: ${recipe["description"]}`);
-      ingredients = ""
-      recipe["recipe_ingredients"].forEach(function(ri, index){
-        ingredients += `<li>${ri["quantity"]} - ${recipe["ingredients"][index]["name"]}</li>`
-      })
-      $(".ingredients").html(ingredients)
-      directions = ""
-      recipe["directions"].forEach(function(direction,index){
-        directions += `<li>${index + 1}. ${direction["direction"]}`
-      })
+      let r = new Recipe(recipe)
+      let details = r.renderRecipe();
+      $(".recipe").html(details);
+      let igr = r.renderIngredients();
+      $(".ingredients").html(igr);
+      let directions = r.renderDirections();
       $(".directions").html(directions)
       $(".js-next-recipe").attr("data-id", recipe["id"]);
     });
@@ -43,6 +34,7 @@ $(function() {
     let posting = $.post(`/reviews`,values)
     posting.done(function(data){
         let review = new Review(data);
+        console.log(review)
         let reviewBody = review.renderReviewBody()
         $(".reviews").append(reviewBody);
     });

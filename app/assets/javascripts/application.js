@@ -15,3 +15,5 @@
 //= require turbolinks
 //= require_tree .
 //= require recipe
+//= require review
+//= require test

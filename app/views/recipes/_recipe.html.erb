@@ -1,36 +1,39 @@
-<% if is_index? %>
-  <div id='name'><h4><%= link_to recipe.capitalized_name, recipe_path(recipe) %></h4></div>
-<% else %>
-  <div id='name'><h4><%= recipe.capitalized_name %></h4></div>
-<% end %>
-
-<div class="rating"> Rating: <%= recipe.rating %>/5 </div>
-<div class="email"> Recipe by: <%= link_to recipe.user.email, user_recipes_path(recipe.user) %> </div>
-<div class='cookTime'> Cook Time: <%= recipe.cook_time %> Minutes </div>
-
-<% if is_show?(recipe) %>
-  <div class="description"> Description: <%= recipe.description %> </div>
-
-  <h5>Ingredients:</h5>
-  <div class='ingredients'>
-  <% @recipe.recipe_ingredients.each do |ri| %>
-    <li><%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
+<div class='recipe'>
+  <% if is_index? %>
+    <div id='name'><h4><%= link_to recipe.capitalized_name, recipe_path(recipe) %></h4></div>
+  <% else %>
+    <div id='name'><h4><%= recipe.capitalized_name %></h4></div>
   <% end %>
-  </div>
 
-  <h5>Directions:</h5>
-  <div class='directions'>
-  <% recipe.directions.each_with_index do |d,i| %>
-    <li><%=i + 1 %>. <%= d.direction %></li>
-  <% end %>
-  </div>
+  Rating: <%= recipe.rating %>/5 <br>
+  Recipe by: <%= link_to recipe.user.email, user_recipes_path(recipe.user) %> <br>
+  Cook Time: <%= recipe.cook_time %> Minutes <br>
 
-  <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
-    <%= link_to "Add Ingredient", new_recipe_recipe_ingredient_path(recipe, recipe.recipe_ingredients) %> <br />
-    <%= link_to "Edit", edit_recipe_path(recipe) %>
-    <%= link_to "Delete", recipe, method: :delete %>
+  <% if is_show?(recipe) %>
+    Description: <%= recipe.description %>
+</div>
+
+    <h5>Ingredients:</h5>
+    <div class='ingredients'>
+    <% @recipe.recipe_ingredients.each do |ri| %>
+      <li><%= ri.quantity %> - <%= ri.capitalized_ingredient %> </li>
+    <% end %>
+    </div>
+
+    <h5>Directions:</h5>
+    <div class='directions'>
+    <% recipe.directions.each_with_index do |d,i| %>
+      <li><%=i + 1 %>. <%= d.direction %></li>
+    <% end %>
+    </div>
+
+    <% if current_user.id == recipe.user.id && (is_user_nested? || is_show?(recipe)) %>
+      <%= link_to "Add Ingredient", new_recipe_recipe_ingredient_path(recipe, recipe.recipe_ingredients) %> <br />
+      <%= link_to "Edit", edit_recipe_path(recipe) %>
+      <%= link_to "Delete", recipe, method: :delete %>
+    <% end %>
+    <br>
+    <button class='js-next-recipe' data-id="<%= recipe.id %>">Next Recipe</button>
+    <br>
   <% end %>
-  <br>
-  <button class='js-next-recipe' data-id="<%= recipe.id %>">Next Recipe</button>
-  <br>
-<% end %>
+</div>
