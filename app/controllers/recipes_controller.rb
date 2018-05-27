@@ -48,7 +48,7 @@ class RecipesController < ApplicationController
     else
       respond_to do |format|
         format.html {render :show}
-        format.json {render json: @recipe}
+        format.json {render json: @recipe, include: 'reviews.user,ingredients,recipe_ingredients,directions,user'}
       end
     end
   end

@@ -22,7 +22,9 @@ $(function() {
       let igr = r.renderIngredients();
       $(".ingredients").html(igr);
       let directions = r.renderDirections();
-      $(".directions").html(directions)
+      $(".directions").html(directions);
+      let reviews = r.renderReviews();
+      $(".reviews").html(reviews);
       $(".js-next-recipe").attr("data-id", recipe["id"]);
     });
   });

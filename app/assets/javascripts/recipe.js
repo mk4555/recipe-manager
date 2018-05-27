@@ -9,6 +9,7 @@ class Recipe{
     this.recipe_ingredients = recipe.recipe_ingredients;
     this.ingredients = recipe.ingredients;
     this.directions = recipe.directions;
+    this.reviews = recipe.reviews;
   }
 }
 
@@ -62,4 +63,13 @@ Recipe.prototype.renderDirections = function() {
     directions += `<li>${index + 1}. ${direction["direction"]}`
   });
   return directions;
+}
+
+Recipe.prototype.renderReviews = function() {
+  let reviews = ""
+  this.reviews.forEach(function(review){
+    reviews += `<strong>${review.user.email}</strong>
+    <p>${review.body}</p>`
+  });
+  return reviews;
 }
