@@ -7,4 +7,5 @@ class RecipeSerializer < ActiveModel::Serializer
   has_many :ingredients, through: :recipe_ingredients
 
   has_many :directions
+  has_many :reviews
 end
