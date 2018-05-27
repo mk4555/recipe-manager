@@ -1,9 +1,9 @@
 $(function() {
   $(".js-show-recipes").on("click", function() {
-    var id = $(this).data("id");
+    let id = $(this).data("id");
     $.get(`/users/${id}/recipes.json`, function(data) {
       // console.log(data)
-      var recipe_details = '';
+      let recipe_details = '';
       data.forEach(function(recipe){
         recipe_details += `<h4><a href="/recipes/${recipe["id"]}"> ${recipe["name"].charAt(0).toUpperCase() + recipe["name"].slice(1)} </a></h4>` +
         `Rating: ${recipe["rating"]}/5 <br/>`+
@@ -15,7 +15,7 @@ $(function() {
   });
 
   $(".js-next-recipe").on("click", function() {
-    var nextId = parseInt($(".js-next-recipe").attr("data-id")) + 1;
+    let nextId = parseInt($(".js-next-recipe").attr("data-id")) + 1;
     $.get(`/recipes/${nextId}.json`, function(recipe) {
       console.log(recipe)
       $("#name").html(`<h4> ${recipe["name"].charAt(0).toUpperCase() + recipe["name"].slice(1)}</h4>`)
@@ -39,12 +39,11 @@ $(function() {
 
   $(".js-review-form").submit(function(event){
     event.preventDefault()
-    var recipeId = parseInt($(".js-review-form").attr("data-recipe-id"))
-    var values = $(this).serialize();
-    var posting = $.post(`/reviews`,values)
+    let values = $(this).serialize();
+    let posting = $.post(`/reviews`,values)
     posting.done(function(data){
-        var review = new Review(data);
-        var reviewBody = review.renderReviewBody()
+        let review = new Review(data);
+        let reviewBody = review.renderReviewBody()
         $(".reviews").append(reviewBody);
     });
   });
