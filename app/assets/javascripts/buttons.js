@@ -25,7 +25,9 @@ $(function() {
       $(".directions").html(directions);
       let reviews = r.renderReviews();
       $(".reviews").html(reviews);
-      $(".js-next-recipe").attr("data-id", recipe["id"]);
+      $(".js-next-recipe").attr("data-id", recipe["id"])
+      $(".js-review-form").attr("data-recipe-id", recipe["id"]);
+      $("form.js-review-form input[name='review[recipe_id]']:hidden").val(recipe["id"])
     });
   });
 
