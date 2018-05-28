@@ -1,4 +1,8 @@
-$(function() {
+$(document).on('turbolinks:load', () => {
+  attachEventListeners()
+});
+
+function attachEventListeners() {
   $(".js-show-recipes").on("click", function() {
     let id = $(this).data("id");
     $.get(`/users/${id}/recipes.json`, function(data) {
@@ -42,5 +46,4 @@ $(function() {
         $(".reviews").append(reviewBody);
     });
   });
-
-});
+}
