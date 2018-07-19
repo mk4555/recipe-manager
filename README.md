@@ -4,7 +4,7 @@ This is a Ruby on Rails App designed to keep track of recipes with basic CRUD pr
 
 # Installation
 
-First, fork the repo and install all gems on your computer via this command.
+First, clone the repo and install all gems on your computer via this command.
 
 ```
 bundle install
